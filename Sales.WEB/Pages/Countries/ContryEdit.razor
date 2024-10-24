@@ -11,7 +11,7 @@
 }
 else
 {
-    <CountryForm Country="country" OnValidSubmit="Edit" ReturnAction="Return"/>
+    <CountryForm @ref="countryForm" Country="country" OnValidSubmit="EditAsync" ReturnAction="Return" />
 }
 
 @code {
@@ -44,12 +44,23 @@ else
         }
     }
 
-    public void Edit()
+    public async Task EditAsync()
     {
-
+        var responseEdit = await repository.Put("/api/countries", country);
+        if(responseEdit.Error)
+        {
+            var message = await responseEdit.GetErrorMessageAsync();
+            await sweetAlertService.FireAsync("Error", message, SweetAlertIcon.Error);
+            return;
+        }
+        else
+        {
+            Return();
+        }
     }
     public void Return()
     {
-        
+        countryForm!.FormPostedSuccessfully = true;
+        navigationManager.NavigateTo("/countries");
     }
 }
