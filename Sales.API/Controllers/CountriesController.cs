@@ -32,7 +32,7 @@ namespace Sales.API.Controllers
             }
             else
             {
-                return Ok();
+                return Ok(country);
 
             }
 
