@@ -1,12 +1,35 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Sales.API.Data;
+using Sales.Shared.Entities;
 
 namespace Sales.API.Controllers
 {
-    public class CategoriesController : Controller
+    [ApiController]
+    [Route("/api/categories")]
+    public class CategoriesController : ControllerBase
     {
-        public IActionResult Index()
+        private readonly DataContext _context;
+
+        public CategoriesController(DataContext context)
         {
-            return View();
+            _context = context;
+        }
+
+        [HttpGet]
+
+        public async Task<IActionResult> Get()
+        {
+            return Ok(await _context.Categories.ToListAsync());
+        }
+
+        [HttpPost]
+
+        public async Task<ActionResult> Post(Category category)
+        {
+            _context.Add(category);
+            await _context.SaveChangesAsync();
+            return Ok(category);
         }
     }
 }
