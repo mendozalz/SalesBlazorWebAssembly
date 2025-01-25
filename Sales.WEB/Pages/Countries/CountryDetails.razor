@@ -15,7 +15,7 @@ else
         <a class="btn btn-success" href="/countries">Regresar</a>
     </div>
 
-    <GenericList MyList="states">
+    <GenericList MyList="country.States!.ToList()">
         <Body>
             <table class="table table-striped">
                 <thead>
@@ -26,7 +26,7 @@ else
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var state in states!)
+                    @foreach (var state in country.States!.ToList())
                     {
                         <tr>
                             <td>
@@ -50,7 +50,6 @@ else
 
 @code {
     private Country? country;
-    private List<State>? states;
 
     [Parameter]
     public int Id { get; set; }
@@ -77,7 +76,6 @@ else
         }
 
         country = responseHttp.Response;
-        states = country!.States!.ToList();
     }
 
     private async Task DeleteAsync(int id)

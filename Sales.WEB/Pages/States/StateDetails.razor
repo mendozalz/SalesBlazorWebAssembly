@@ -11,13 +11,13 @@ else
 {
     <h3>@state.Name</h3>
     <div class="mb-2">
-        <a class="btn btn-primary" href="/cities/create/@state.Id">Nueva Ciuadad</a>
+        <a class="btn btn-primary" href="/cities/create/@StateId">Nueva Ciuadad</a>
         <a class="btn btn-success" href="/countries/details/@state.CountryId">Regresar</a>
     </div>
 
     // Mejora en el codigo al llamar la lista de ciudades
 
-    <GenericList MyList="state.Cities!.ToList()">  
+    <GenericList MyList="state.Cities.ToList()">  
         <Body>
             <table class="table table-striped">
                 <thead>
@@ -27,7 +27,7 @@ else
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var city in state.Cities!.ToList()) // Se agrega un nuevo apuntador en memoria
+                    @foreach (var city in state.Cities.ToList()) // Se agrega un nuevo apuntador en memoria
                     {
                         <tr>
                             <td>
@@ -48,7 +48,6 @@ else
 
 @code {
      private State? state;
-
 
     [Parameter]
     public int StateId { get; set; }
