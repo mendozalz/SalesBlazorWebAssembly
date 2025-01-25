@@ -4,9 +4,7 @@ namespace Sales.Shared.Entities
 {
 	public class Country
 	{
-        public int StatesNumber;
-
-        public int Id { get; set; }
+		public int Id { get; set; }
 
 		[Display(Name = "País")]
 		[Required(ErrorMessage = "El campo {0} es obligatorio")]
